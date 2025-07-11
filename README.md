@@ -20,7 +20,7 @@ Personal Neovim configuration based on [LazyVim](https://github.com/LazyVim/Lazy
 
 2. このリポジトリをクローン
    ```bash
-   git clone https://github.com/yourusername/nvim-config.git ~/.config/nvim
+   git clone https://github.com/kazuvin/nvim-config.git ~/.config/nvim
    ```
 
 3. Neovimを起動してプラグインの自動インストールを実行
