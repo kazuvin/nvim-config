@@ -1,15 +1,16 @@
 # 素材の出典
 
 画像は `scripts/prepare-image.sh`、音声は `scripts/prepare-sound.sh` で加工したもの
-（画像はぼかして暗くし、音声は両端を切ってループ用にクロスフェードし、音量をそろえた）。
+（画像はしずかなインターネットと同じく 12px ぼかして下地の #2c2d2d に 75% の濃さで重ね、
+音声は両端を切ってループ用にクロスフェードし、音量をそろえた）。
 
 ## 背景画像
 
 | ファイル | 写真 | 撮影者 | ライセンス |
 |---|---|---|---|
-| `backgrounds/river.jpg` | [Turquoise river flowing in a mountain valley](https://www.pexels.com/photo/turquoise-river-flowing-in-a-mountain-valley-17948409/) | Annaëlle Quionquion | [Pexels License](https://www.pexels.com/license/) |
-| `backgrounds/mountain.jpg` | [Layered mountain peaks at sunset with orange sky](https://unsplash.com/photos/layered-mountain-peaks-at-sunset-with-orange-sky-zSiqe6j9Aao) | Ahmet Yüksek | [Unsplash License](https://unsplash.com/license) |
-| `backgrounds/rain.jpg` | [A forest filled with lots of trees covered in fog](https://unsplash.com/photos/a-forest-filled-with-lots-of-trees-covered-in-fog-_BR3-t7VRrw) | Maksim Samuilionak | [Unsplash License](https://unsplash.com/license) |
+| `backgrounds/river.jpg` | [A stream running through a lush green forest](https://unsplash.com/photos/a-stream-running-through-a-lush-green-forest-nM7KMy14kcY) | Daniel Alexandre Páscoa | [Unsplash License](https://unsplash.com/license) |
+| `backgrounds/mountain.jpg` | [The silhouette of a mountain against a dark blue sky](https://unsplash.com/photos/the-silhouette-of-a-mountain-against-a-dark-blue-sky-G7sDNMQn_GA) | Martin Adams | [Unsplash License](https://unsplash.com/license) |
+| `backgrounds/rain.jpg` | [Rain drops on a window with a dark sky in the background](https://unsplash.com/photos/rain-drops-on-a-window-with-a-dark-sky-in-the-background-8Poc0TjWOgA) | Bernd Dittrich | [Unsplash License](https://unsplash.com/license) |
 
 ## 環境音
 

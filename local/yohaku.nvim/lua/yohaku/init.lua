@@ -13,13 +13,13 @@ end
 ---@field label string 選択時に表示する名前
 ---@field image? string 背景画像（ぼかし済みの JPEG / PNG）
 ---@field sound? string 環境音（afplay で再生できる形式）
----@field bg string 画像の下地の色（画像の平均的な暗い色。選択範囲の混色にも使う）
+---@field bg string 画像の下地の色（画像の平均色。選択範囲の混色や、行末の「>」を隠す色にも使う）
 
 ---@class yohaku.Config
 local defaults = {
-  -- 本文の幅（マス数。全角はこの半分の字数）。既定のフォント設定ではマス幅が約 7.6px なので、
-  -- 78 マス ≈ 590px（全角 39 字）。フォントや字送りを変えたら合わせて変える
-  width = 78,
+  -- 本文の幅（マス数。全角はこの半分の字数）。既定のフォント設定ではマス幅が 8.5px なので、
+  -- 70 マス ≈ 595px（全角 35 字）。フォントや字送りを変えたら合わせて変える
+  width = 70,
   paragraph_gap = 1, -- 段落の間に足す見た目上の行数
   heading_gap = 2, -- 見出しの後に足す行数
   h1_gap = 3, -- 見出しレベル 1（`# `）の上に足す行数。文書の先頭の余白もこれで取る
@@ -42,19 +42,19 @@ local defaults = {
       label = "川",
       image = asset("backgrounds/river.jpg"),
       sound = asset("sounds/river.m4a"),
-      bg = "#0a1211",
+      bg = "#333725",
     },
     mountain = {
       label = "山",
       image = asset("backgrounds/mountain.jpg"),
       sound = asset("sounds/mountain.m4a"),
-      bg = "#23130d",
+      bg = "#0b1323",
     },
     rain = {
       label = "雨",
       image = asset("backgrounds/rain.jpg"),
       sound = asset("sounds/rain.m4a"),
-      bg = "#0e0f0f",
+      bg = "#13212a",
     },
   },
   sound = {
@@ -71,12 +71,12 @@ local defaults = {
     -- 1 番目のフォントに合わせて和文を拡大するので、Hack だと和文は英数字の約 1.04 倍になる。
     -- 以下の値はそれを前提に計算したもの（フォントを変えたら計算し直しが必要）
     font_family = { "Hack Nerd Font Mono", "Hiragino Sans" },
-    font_size = 14, -- 和文は約 14.5pt
+    font_size = 16, -- 和文は約 16.6pt
     -- ヒラギノ W3 は細く、背景の上だと沈むので、いちばん弱い強さで少しだけ太らせる
     font_thicken = true,
     font_thicken_strength = 0, -- 0〜255（0 でも太らせないわけではなく、いちばん弱い太らせ方）
-    -- 和文の字送りを約 1.05em（字間 0.05em）にする。マス幅は 14 × 0.602 × 0.9 ≈ 7.6px。
-    -- これ以上詰めると英数字どうしがくっつく
+    -- 和文の字送りを詰める。Retina ではマス幅 16 × 2 × 0.602 ≈ 19 画素を 1 割詰めて 17 画素（8.5px）、
+    -- 和文 1 字はその 2 マスで 17px（約 1.02em）。これ以上詰めると英数字どうしがくっつく
     cell_width = "-10%",
     -- 行送りを和文の約 2.3 倍にする。文字はマスの縦中央に置かれ、上下が余白になる。
     -- カーソルの高さは文字の高さのまま（ライティングモード中は縦棒のカーソルにする）
