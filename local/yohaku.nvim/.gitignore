@@ -1,0 +1,3 @@
+# 環境音は BBC Sound Effects（RemArc Licence）の録音で再配布できないので、git には入れない。
+# 新しいマシンでは scripts/fetch-sounds.sh で作り直す
+/sounds/
