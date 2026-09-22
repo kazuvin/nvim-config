@@ -37,22 +37,24 @@ local CURSORS = {
   underline = "n-v-c-sm-r-cr-o:hor10,i-ci-ve:hor10-blinkwait400-blinkon500-blinkoff500",
 }
 
--- Ghostty 1.3 までは縦棒カーソルの高さがマスの高さに固定されていて、行間を広げると伸びる
--- （adjust-cursor-height も効かない。https://github.com/ghostty-org/ghostty/pull/13225 で修正）。
--- 1.4.0 以降の正式版と、tip などの開発版（版番号が 1.2.3 の形でない）は修正済みとみなす
+-- Ghostty 1.3 までは箱型・縦棒のカーソルの高さがマスの高さに固定されていて、行間を広げると伸びる
+-- （adjust-cursor-height も効かない。https://github.com/ghostty-org/ghostty/pull/13225 で修正され、
+-- 文字の高さでマスの縦中央に描かれるようになった）。1.4.0 以降の正式版と、tip などの開発版
+-- （版番号が 1.2.3 の形でない）は修正済みとみなし、ふだんのカーソルをそのまま使う
 ---@param cfg yohaku.Config
+---@return string? guicursor に設定する値（nil ならふだんのまま）
 local function cursor_style(cfg)
   if cfg.cursor ~= "auto" then
     return CURSORS[cfg.cursor]
   end
   if not (cfg.ghostty.enabled and cfg.ghostty.cell_height) then
-    return CURSORS.bar
+    return nil
   end
   local stable = (vim.env.TERM_PROGRAM_VERSION or ""):match("^(%d+%.%d+%.%d+)$")
   if stable and not vim.version.ge(stable, "1.4.0") then
     return CURSORS.underline
   end
-  return CURSORS.bar
+  return nil
 end
 
 ---@param cfg yohaku.Config
@@ -186,7 +188,10 @@ function M.open(cfg, on_close)
     last = { buf = buf, cursor = cursor },
     guicursor = vim.o.guicursor,
   }
-  vim.o.guicursor = cursor_style(cfg)
+  local guicursor = cursor_style(cfg)
+  if guicursor then
+    vim.o.guicursor = guicursor
+  end
   vim.api.nvim_win_set_hl_ns(backdrop, hl_ns)
   vim.api.nvim_win_set_hl_ns(win, hl_ns)
   set_text_opts(win)
