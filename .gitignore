@@ -6,3 +6,9 @@ debug
 foo.*
 *.log
 data
+
+# このマシン専用のファイル
+.claude/settings.local.json
+.claude/*.lock
+.DS_Store
+*.bak

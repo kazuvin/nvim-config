@@ -4,7 +4,7 @@
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
--- Increment/decrement
+-- Increment/Decrement
 keymap.set("n", "+", "<C-a>")
 keymap.set("n", "-", "<C-x>")
 
@@ -38,10 +38,10 @@ keymap.set("n", "<C-w><right>", "<C-w>>")
 keymap.set("n", "<C-w><up>", "<C-w>+")
 keymap.set("n", "<C-w><down>", "<C-w>-")
 
--- Diagnostic
-keymap.set("n", "<C-j>", function()
+-- Diagnostics
+keymap.set("n", "gj", function()
   vim.diagnostic.goto_next()
 end, opts)
-
--- Lazygit
-keymap.set("n", "<leader>gg", "<cmd>LazyGit<cr>", opts)
+keymap.set("n", "gk", function()
+  vim.diagnostic.goto_prev()
+end, opts)
