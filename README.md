@@ -67,6 +67,7 @@ local/yohaku.nvim/   自作のライティングモード（lua/plugins/yohaku.l
 - `:WritingSound [on|off]`: 環境音の切り替え
 
 背景・フォント・行間は書く用ウィンドウの Ghostty にだけ効き、ふだんの Ghostty には影響しない。
+書く用ウィンドウでは、入力を終えたときや手が止まったときに自動で保存される。
 素材の出典は [`local/yohaku.nvim/CREDITS.md`](local/yohaku.nvim/CREDITS.md) を参照。
 
 ### カスタマイズ

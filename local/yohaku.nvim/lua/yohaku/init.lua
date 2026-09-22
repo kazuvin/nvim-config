@@ -289,6 +289,44 @@ function M.setup(opts)
   if in_window() then
     -- ふだんの Neovim も同じファイルを開いているので、スワップファイルの警告を出さない
     vim.opt.shortmess:append("A")
+    -- 書く用ウィンドウを赤いボタンなどで閉じると Neovim が強制終了され、スワップファイルが残る。
+    -- 残ったスワップファイルがあると、ふだんの Neovim で開いたときに確認が出て、既定の
+    -- 「読み取り専用で開く」を選ぶと保存できなくなるので、スワップファイルは作らない。
+    -- 代わりに書いた内容はこまめに自動保存する
+    vim.o.swapfile = false
+    local function save(buf)
+      if
+        vim.api.nvim_buf_is_valid(buf)
+        and vim.bo[buf].buftype == ""
+        and vim.bo[buf].modified
+        and not vim.bo[buf].readonly
+        and vim.api.nvim_buf_get_name(buf) ~= ""
+      then
+        vim.api.nvim_buf_call(buf, function()
+          vim.cmd("silent! update")
+        end)
+      end
+    end
+    vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged", "FocusLost" }, {
+      group = group,
+      callback = function(ev)
+        save(ev.buf)
+      end,
+    })
+    -- 入力中は、手が 1 秒止まったら保存する
+    local pending = 0
+    vim.api.nvim_create_autocmd("TextChangedI", {
+      group = group,
+      callback = function(ev)
+        pending = pending + 1
+        local mine = pending
+        vim.defer_fn(function()
+          if mine == pending then
+            save(ev.buf)
+          end
+        end, 1000)
+      end,
+    })
     if M.config.moods[vim.env.YOHAKU_MOOD or ""] then
       state.mood = vim.env.YOHAKU_MOOD
     end
